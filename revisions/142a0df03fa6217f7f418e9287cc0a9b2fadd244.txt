@@ -1,0 +1,2 @@
+poolish/internal/tempdir/writefiles.go:9:	WriteFiles	77.8%
+total:						(statements)	77.8%
