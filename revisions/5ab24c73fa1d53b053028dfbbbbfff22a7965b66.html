@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>tempdir: Go Coverage Report</title>
+		<script src="../index.js?ad79d67a7b27030a910cdcdaaaf1e441"></script>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">poolish/internal/tempdir/writefiles.go (77.8%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package tempdir
+
+import (
+        "os"
+        "path/filepath"
+        "testing"
+)
+
+func WriteFiles(fsroot string, files map[string]string, t *testing.T) <span class="cov8" title="1">{
+        t.Helper()
+
+        for path, content := range files </span><span class="cov8" title="1">{
+                path = filepath.Join(fsroot, path)
+
+                err := os.MkdirAll(filepath.Dir(path), 0o755)
+                if err != nil </span><span class="cov0" title="0">{
+                        t.Fatalf("MkdirAll(%s): %v", path, err)
+                }</span>
+
+                <span class="cov8" title="1">err = os.WriteFile(path, []byte(content), 0o644)
+                if err != nil </span><span class="cov0" title="0">{
+                        t.Fatalf("WriteFile(%s): %v", path, err)
+                }</span>
+        }
+}
+</pre>
+		
+		</div>
+	</body>
+</html>
