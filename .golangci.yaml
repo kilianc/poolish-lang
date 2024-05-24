@@ -1,0 +1,34 @@
+linters:
+  enable-all: false
+  disable-all: true
+  fast: false
+  enable:
+    - errchkjson
+    - errorlint
+    - godot
+    - gofumpt
+    - intrange
+    - ireturn
+    - lll
+    - nestif
+    - nilerr
+    - nlreturn
+    - revive
+    - testifylint
+    - wrapcheck
+    - wsl
+
+issues:
+  exclude-files:
+    - "mock.*\\.go"
+  exclude-rules:
+    - path: '.+_test\.go'
+      linters:
+        - forcetypeassert
+
+output:
+  print-issued-lines: false
+
+linters-settings:
+  gofumpt:
+    module-path: "poolish"

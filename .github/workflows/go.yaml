@@ -1,0 +1,58 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+  build:
+    name: Build and Test
+    permissions:
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+
+    - name: Docker Build
+      run: make docker-build
+
+    - name: Build
+      run: make build
+
+    - name: Test
+      run: make test
+
+    - name: Create cover files
+      run: |
+        make cover.txt
+        make cover.html
+
+    - name: Go Beautiful HTML Coverage
+      uses: gha-common/go-beautiful-html-coverage@main
+      with:
+        threshold: 75
+
+    - name: Cover Check
+      run: make check-cover
+
+    - name: Version Check
+      run: make check-version
+
+    - name: Commit Check
+      run: make check-commit message='${{ github.event.pull_request.title }}'

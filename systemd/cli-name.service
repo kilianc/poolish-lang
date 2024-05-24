@@ -1,0 +1,10 @@
+[Unit]
+Description=poolish
+
+[Service]
+Type=oneshot
+EnvironmentFile=/usr/local/etc/poolish/poolish.env
+ExecStart=/usr/local/bin/poolish
+
+[Install]
+WantedBy=multi-user.target

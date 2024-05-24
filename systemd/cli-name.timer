@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs poolish.service every 5 minutes
+
+[Timer]
+OnBootSec=0min
+OnUnitActiveSec=5min
+Unit=poolish.service
+
+[Install]
+WantedBy=timers.target
